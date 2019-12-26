@@ -14,10 +14,10 @@ The **components** require **Vue >= 2.0.0**
 
 ```html
 <dnd-grid-container :layout.sync="layoutJson">
-    <dnd-grid-box :boxId="box1Id">
+    <dnd-grid-box :box-id="box1Id">
         <h1>Box 1</h1>
     </dnd-grid-box>
-    <dnd-grid-box :boxId="box2Id" resizeVisible>
+    <dnd-grid-box :box-id="box2Id" resize-visible>
         <h1>Box 2</h1>
     </dnd-grid-box>
     ...
@@ -66,27 +66,27 @@ The **components** require **Vue >= 2.0.0**
 |   - - y                |                 | The y position in the grid by cells                                       |
 |   - - w                |                 | The width in the grid by cells                                            |
 |   - - h                |                 | The height in the grid by cells                                           |
-| cellSize               |                 | Object describing the default cell size                                   |
+| cell-size               |                 | Object describing the default cell size                                   |
 |   - w                  | 100             | Width in pixels                                                           |
 |   - h                  | 100             | Height in pixels                                                          |
-| maxColumnCount         | infinity        | Integer max columns                                                       |
-| maxRowCount            | infinity        | Integer max rows                                                          |
+| max-column-count         | infinity        | Integer max columns                                                       |
+| max-row-count            | infinity        | Integer max rows                                                          |
 | margin                 | 5               | Integer in pixels                                                         |
 | outerMargin            | 0               | Integer in pixels                                                         |
 | bubbleUp               | false           | Boolean when true bubbles boxes to the top of the screen                  |
-| autoAddLayoutForNewBox | true            | Boolean                                                                   |
-| defaultSize            |                 | Default size of a new box                                                 |
+| auto-add-layout-for-new-box | true            | Boolean                                                                   |
+| default-size            |                 | Default size of a new box                                                 |
 |   - w                  | 1               | Width in cells                                                            |
 |   - h                  | 1               | Height in cells                                                           |
-| fixLayoutOnLoad        | true            | Boolean describing to fix layout (overlaps) on load                       |
+| fix-layout-on-load        | true            | Boolean describing to fix layout (overlaps) on load                       |
 
 ## Box:
 
 | Property               | DEFAULT         | Description                                                               |
 |----------------------- | --------------- | ------------------------------------------------------------------------- |
-| boxId                  | !               | String, Box id, this is a required field                                  |
-| dragSelector           | *               | String, id of the element by which you can drag the box                   |
-| resizeVisible          | false           | Boolean, displays a circle the corner of boxes on mobile devices          |
+| box-id                  | !               | String, Box id, this is a required field                                  |
+| drag-selector           | *               | String, id of the element by which you can drag the box                   |
+| resize-visible          | false           | Boolean, displays a circle the corner of boxes on mobile devices          |
 
 ## Installation
 

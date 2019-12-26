@@ -60,14 +60,14 @@
     export default {
         name: 'DndGridBox',
         props: {
-            boxId: {
+            box-id: {
                 required: true
             },
-            dragSelector: {
+            drag-selector: {
                 type: String,
                 default: '*'
             },
-            resizeVisible: {
+            resize-visible: {
                 type: Boolean,
                 default: false
             }
@@ -81,8 +81,8 @@
         },
         computed: {
             style() {
-                if (this.container && this.container.isBoxVisible(this.boxId)) {
-                    var pixelPosition = this.container.getPixelPositionById(this.boxId)
+                if (this.container && this.container.isBoxVisible(this.box-id)) {
+                    var pixelPosition = this.container.getPixelPositionById(this.box-id)
                     return {
                         display: 'block',
                         width: pixelPosition.w + 'px',
@@ -100,7 +100,7 @@
                     'dnd-grid-box': true,
                     'dragging': this.dragging,
                     'resizing': this.resizing,
-                    'resize.visible': this.resizeVisible
+                    'resize.visible': this.resize-visible
                 }
             }
         },
@@ -129,7 +129,7 @@
             this.$dragHandle = this.$el || this.$refs.dragHandle
 
             const startEvent = evt => {
-                if (!utils.matchesSelector(evt.target, this.dragSelector)) {
+                if (!utils.matchesSelector(evt.target, this.drag-selector)) {
                     return
                 }
 

@@ -6,7 +6,7 @@
         <slot></slot>
         <box
             class="placeholder"
-            boxId="::placeholder::"
+            box-id="::placeholder::"
         ></box>
     </div>
 </template>
@@ -44,7 +44,7 @@
                 type: Array,
                 required: true
             },
-            cellSize: {
+            cell-size: {
                 type: Object,
                 default () {
                     return {
@@ -53,11 +53,11 @@
                     }
                 }
             },
-            maxColumnCount: {
+            max-column-count: {
                 type: Number,
                 default: Infinity
             },
-            maxRowCount: {
+            max-row-count: {
                 type: Number,
                 default: Infinity
             },
@@ -73,12 +73,12 @@
                 type: Boolean,
                 default: false
             },
-            autoAddLayoutForNewBox: {
+            auto-add-layout-for-new-box: {
                 type: Boolean,
                 required: false,
                 default: true
             },
-            defaultSize: {
+            default-size: {
                 type: Object,
                 required: false,
                 default () {
@@ -88,7 +88,7 @@
                     }
                 }
             },
-            fixLayoutOnLoad: {
+            fix-layout-on-load: {
                 type: Boolean,
                 required: false,
                 default: true
@@ -96,7 +96,7 @@
         },
         watch: {
             layout (newLayout) {
-                if (this.fixLayoutOnLoad) {
+                if (this.fix-layout-on-load) {
                     if (utils.layoutHasCollisions(newLayout)) {
                         this.updateLayout(utils.fixLayout(newLayout, this.bubbleUp))
                     }
@@ -136,12 +136,12 @@
                 var layoutSize = utils.getLayoutSize(this.layout)
                 return {
                     minWidth: (
-                        (layoutSize.w * this.cellSize.w) +
+                        (layoutSize.w * this.cell-size.w) +
                         ((layoutSize.w - 1) * this.margin) +
                         (2 * this.outerMargin)
                     ) + 'px',
                     minHeight: (
-                        (layoutSize.h * this.cellSize.h) +
+                        (layoutSize.h * this.cell-size.h) +
                         ((layoutSize.h - 1) * this.margin) +
                         (2 * this.outerMargin)
                     ) + 'px'
@@ -169,21 +169,21 @@
             },
             getPixelPositionById (id) {
                 if (this.dragging.boxLayout && this.dragging.boxLayout.id === id) {
-                    let pixels = utils.positionToPixels(this.dragging.boxLayout.position, this.cellSize, this.margin, this.outerMargin)
+                    let pixels = utils.positionToPixels(this.dragging.boxLayout.position, this.cell-size, this.margin, this.outerMargin)
                     pixels.x += this.dragging.offset.x
                     pixels.y += this.dragging.offset.y
                     return pixels
                 }
 
                 if (this.resizing.boxLayout && this.resizing.boxLayout.id === id) {
-                    let pixels = utils.positionToPixels(this.resizing.boxLayout.position, this.cellSize, this.margin, this.outerMargin)
+                    let pixels = utils.positionToPixels(this.resizing.boxLayout.position, this.cell-size, this.margin, this.outerMargin)
                     pixels.w += this.resizing.offset.x
                     pixels.h += this.resizing.offset.y
                     return pixels
                 }
 
                 var boxLayout = this.getBoxLayoutById(id)
-                return utils.positionToPixels(boxLayout.position, this.cellSize, this.margin, this.outerMargin)
+                return utils.positionToPixels(boxLayout.position, this.cell-size, this.margin, this.outerMargin)
             },
             isBoxVisible (id) {
                 var boxLayout = this.getBoxLayoutById(id)
@@ -191,8 +191,8 @@
             },
             getPositionByPixel (x, y) {
                 return {
-                    x: Math.round(x / (this.cellSize.w + this.margin)),
-                    y: Math.round(y / (this.cellSize.h + this.margin))
+                    x: Math.round(x / (this.cell-size.w + this.margin)),
+                    y: Math.round(y / (this.cell-size.h + this.margin))
                 }
             },
             updateLayout (layout) {
@@ -201,8 +201,8 @@
             registerBox (box) {
                 this.enableResizing(box)
                 this.enableDragging(box)
-                if (this.isMounted && this.autoAddLayoutForNewBox) {
-                    this.createBoxLayout(box.$props.boxId)
+                if (this.isMounted && this.auto-add-layout-for-new-box) {
+                    this.createBoxLayout(box.$props.box-id)
                 }
             },
             unregisterBox (box) {
@@ -212,15 +212,15 @@
                 var isDragging = false
 
                 let validateTargetPosition = (targetX, targetY) => {
-                    if (targetX + this.dragging.boxLayout.position.w > this.maxColumnCount) {
-                        targetX = this.maxColumnCount - this.dragging.boxLayout.position.w
+                    if (targetX + this.dragging.boxLayout.position.w > this.max-column-count) {
+                        targetX = this.max-column-count - this.dragging.boxLayout.position.w
                     } else {
                         if (targetX < 0) {
                             targetX = 0
                         }
                     }
-                    if (targetY + this.dragging.boxLayout.position.h > this.maxRowCount) {
-                        targetY = this.maxRowCount - this.dragging.boxLayout.position.h
+                    if (targetY + this.dragging.boxLayout.position.h > this.max-row-count) {
+                        targetY = this.max-row-count - this.dragging.boxLayout.position.h
                     } else {
                         if (targetY < 0) {
                             targetY = 0
@@ -233,7 +233,7 @@
                 }
 
                 box.$on('dragStart', evt => {
-                    var boxLayout = this.getBoxLayoutById(box.boxId)
+                    var boxLayout = this.getBoxLayoutById(box.box-id)
                     if (boxLayout.pinned) {
                         return
                     }
@@ -354,15 +354,15 @@
                 var isResizing = false
 
                 let validateTargetSize = (targetW, targetH) => {
-                    if (this.resizing.boxLayout.position.x + targetW > this.maxColumnCount) {
-                        targetW = this.maxColumnCount - this.resizing.boxLayout.position.x
+                    if (this.resizing.boxLayout.position.x + targetW > this.max-column-count) {
+                        targetW = this.max-column-count - this.resizing.boxLayout.position.x
                     } else {
                         if (targetW < 1) {
                             targetW = 1
                         }
                     }
-                    if (this.resizing.boxLayout.position.y + targetH > this.maxRowCount) {
-                        targetH = this.maxRowCount - this.resizing.boxLayout.position.y
+                    if (this.resizing.boxLayout.position.y + targetH > this.max-row-count) {
+                        targetH = this.max-row-count - this.resizing.boxLayout.position.y
                     } else {
                         if (targetH < 1) {
                             targetH = 1
@@ -375,7 +375,7 @@
                 }
 
                 box.$on('resizeStart', evt => {
-                    var boxLayout = this.getBoxLayoutById(box.boxId)
+                    var boxLayout = this.getBoxLayoutById(box.box-id)
                     if (boxLayout.pinned) {
                         return
                     }
@@ -490,21 +490,21 @@
                     this.$emit('resize:end', newLayout)
                 })
             },
-            createBoxLayout (...boxIds) {
-                boxIds = boxIds.filter(boxId => !this.getBoxLayoutById(boxId))
+            createBoxLayout (...box-ids) {
+                box-ids = box-ids.filter(box-id => !this.getBoxLayoutById(box-id))
 
-                if (boxIds.length) {
+                if (box-ids.length) {
                     let newLayout = [
                         ...this.layout
                     ]
-                    boxIds.forEach(boxId => {
+                    box-ids.forEach(box-id => {
                         newLayout.push(utils.moveBoxToFreePlace(newLayout, {
-                            id: boxId,
+                            id: box-id,
                             hidden: false,
                             position: {
                                 x: 0,
                                 y: 0,
-                                ...this.defaultSize
+                                ...this.default-size
                             }
                         }, this.bubbleUp))
                     })
@@ -517,8 +517,8 @@
         },
         mounted () {
             this.isMounted = true
-            let boxIds = this.$children.map(box => box.$props.boxId)
-            this.createBoxLayout(...boxIds)
+            let box-ids = this.$children.map(box => box.$props.box-id)
+            this.createBoxLayout(...box-ids)
         },
         beforeDestroy () {
             List.delete(this)

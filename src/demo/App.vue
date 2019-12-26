@@ -5,15 +5,15 @@
 
         <dnd-grid-container
             :layout.sync="layout"
-            :cellSize="cellSize"
-            :maxColumnCount="maxColumnCount"
-            :maxRowCount="maxRowCount"
+            :cell-size="cell-size"
+            :max-column-count="max-column-count"
+            :max-row-count="max-row-count"
             :margin="margin"
             :bubbleUp="bubbleUp"
         >
             <dnd-grid-box
-                boxId="settings"
-                dragSelector="div.card-header"
+                box-id="settings"
+                drag-selector="div.card-header"
             >
                 <div class="card demo-box">
                     <div class="card-header">
@@ -29,10 +29,10 @@
                         <div class="form-group row">
                             <label for="settings-grid-size-w-input" class="col-sm-4 col-form-label">Cell Size</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="number" v-model.number="cellSize.w" id="settings-grid-size-w-input">
+                                <input class="form-control" type="number" v-model.number="cell-size.w" id="settings-grid-size-w-input">
                             </div>
                             <div class="col-sm-4">
-                                <input class="form-control" type="number" v-model.number="cellSize.h">
+                                <input class="form-control" type="number" v-model.number="cell-size.h">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -48,9 +48,9 @@
             </dnd-grid-box>
             <dnd-grid-box
                 v-for="number in boxCount"
-                :boxId="number"
+                :box-id="number"
                 :key="number"
-                dragSelector="div.card-header"
+                drag-selector="div.card-header"
             >
                 <div class="card demo-box">
                     <div class="card-header">
@@ -80,12 +80,12 @@
 
         data () {
             return {
-                cellSize: {
+                cell-size: {
                     w: 100,
                     h: 100
                 },
-                maxColumnCount: 10,
-                maxRowCount: Infinity,
+                max-column-count: 10,
+                max-row-count: Infinity,
                 bubbleUp: false,
                 margin: 5,
                 boxCount: 4,
